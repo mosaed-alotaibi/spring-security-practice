@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author MOSAED ALOTAIBI
@@ -19,7 +20,10 @@ public class UserDTO implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "read");
+        return user.getAuthorities()
+                .stream()
+                .map(AuthorityDTO::new)
+                .collect(Collectors.toList());
     }
 
     @Override

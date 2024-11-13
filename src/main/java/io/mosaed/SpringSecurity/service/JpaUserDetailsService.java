@@ -23,6 +23,7 @@ public class JpaUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var user = userRepository.findUserByUsername(username);
 
+//                     (UserDTO::new) == (car -> new CarDTO(car))
         return user.map(UserDTO::new).orElseThrow(() -> new UsernameNotFoundException("Username not found, username: " + username));
     }
 }
